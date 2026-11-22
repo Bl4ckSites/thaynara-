@@ -1,0 +1,75 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <!-- CORREÇÃO CRÍTICA: Viewport Fit Cover para telas modernas (Notch/SafeArea) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- SEGURANÇA SUPREMA: Impede o envio de informações de rastreio para o servidor receptor -->
+    <meta name="referrer" content="no-referrer">
+
+    <!-- Opcional: Definir uma política de cache agressiva para TTFB baixíssimo -->
+    <meta http-equiv="Cache-Control" content="public, max-age=3600">
+
+    <title>Portal Sombrio - Boneca Emília</title>
+
+    <!-- Link para o CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <!-- O wrapper que será forçado pela altura no JS -->
+    <div class="full-screen-wrapper">
+
+        <!-- Elemento Decorativo de Contingência -->
+        <div class="decorative-trail"></div>
+
+        <!-- 2. Header -->
+        <header class="header-container">
+            <div class="badge-status badge-plus18">🔥 +18</div>
+            <div class="badge-status badge-online">
+                <span class="indicator-online"></span>
+                Online agora
+            </div>
+        </header>
+
+        <!-- 3. Títulos -->
+        <main class="main-title-wrapper">
+            <h1 class="sub-header-small">+18 • BONECA EMÍLIA</h1>
+            <h1 class="title-line1">TEM UM LADO MEU</h1>
+            <h1 class="title-line2">QUE É SÓ SEU</h1>
+        </main>
+
+        <!-- 4. Chat -->
+        <div class="chat-container">
+            <div class="profile-photo-container">
+                <!-- IMAGEM DE PERFIL - Otimizada -->
+                <img src="/background.jpg" alt="Boneca Emília" class="profile-photo"> 
+            </div>
+            <div class="message-bubble">
+                <div>
+                    <div class="message-header">
+                        <strong>Emília</strong> <span>enviou agora</span>
+                    </div>
+                    <div class="message-body">
+                        Eu sei um lugar que vai me ver de <strong>pertinho..</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. CTA e Rodapé -->
+        <div class="cta-footer-container">
+            <!-- O Botão - O ponto de gatilho principal -->
+            <button class="cta-button">MEU GRUPINHO VIP 👀</button>
+            <p class="footer-text">APROVEITE SEM MODERAÇÃO</p>
+        </div>
+
+    </div>
+
+    <!-- Script de Correção de 100vh -->
+    <script src="/js/main.js"></script>
+    <!-- Potencialmente, aqui entraria o código de Service Worker, se não for servido pelo Worker -->
+</body>
+</html>
