@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Thaynara Martins</title>
+    <meta name="description" content="Página oficial de Thaynara Martins.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="container">
+        <h1 class="profile-name">Thaynara Martins</h1>
+
+        <div class="avatar-wrapper">
+            <!-- Dimensões explícitas + fallback para imagem ausente -->
+            <img src="assets/profile.jpg" 
+                 alt="Foto de perfil de Thaynara Martins" 
+                 class="profile-pic" 
+                 width="180" 
+                 height="180" 
+                 loading="eager"
+                 onerror="this.style.display='none'; this.parentElement.classList.add('avatar-fallback');">
+        </div>
+
+        <div class="card-panel">
+            <a href="https://bouncy.ai/segredosdanara" 
+               class="cta-button" 
+               id="ctaButton"
+               target="_blank" 
+               rel="noopener noreferrer">
+                CLIQUE AQUI PARA ACESSAR
+            </a>
+        </div>
+
+        <footer class="footer">
+            <p>Thaynara Martins © 2026. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
