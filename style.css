@@ -1,86 +1,146 @@
-/* Reset e configurações globais */
-* {
+/* ============================================================
+   1. RESET E CONFIGURAÇÕES GLOBAIS
+   ============================================================ */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    /* Paleta (fundo preto mantido) */
+    --bg: #000000;
+    --surface: #1c1c1e;
+    --surface-alt: #1a1a1a;
+    --surface-fallback: #333333;
+    --text: #ffffff;
+    --text-muted: #8e8e93;
+    --text-subtle: #777777;
+    --accent: #25d366;
+    --accent-hover: #1ebe5a;
+    --accent-glow: rgba(37, 211, 102, 0.4);
+    --accent-glow-strong: rgba(37, 211, 102, 0.6);
+    --border: #ffffff;
+
+    /* Formas e medidas */
+    --radius-panel: 30px;
+    --radius-pill: 50px;
+    --container-max: 480px;
+    --touch-target: 48px;
+    --space: 20px;
+
+    /* Sombras */
+    --shadow-panel: 0 8px 25px rgba(0, 0, 0, 0.6);
+    --shadow-avatar: 0 4px 15px rgba(0, 0, 0, 0.5);
+    --shadow-btn: 0 4px 15px var(--accent-glow);
+    --shadow-btn-hover: 0 6px 20px var(--accent-glow-strong);
+    --shadow-btn-active: 0 2px 10px var(--accent-glow);
+
+    /* Tipografia */
+    --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+
+    color-scheme: dark;
+}
+
 html {
     /* Fallback para navegadores antigos */
     height: 100%;
-    /* Usa a altura dinâmica da viewport para evitar problemas com barras de endereço */
+    /* Altura dinâmica evita "pulos" com a barra de endereço no mobile */
     height: 100dvh;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
-    background-color: #000000;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    color: #ffffff;
+    background-color: var(--bg);
+    font-family: var(--font-stack);
+    color: var(--text);
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     /* Respeita áreas seguras (notch, indicador home) */
-    padding: max(20px, env(safe-area-inset-top)) 
-             max(20px, env(safe-area-inset-right)) 
-             max(20px, env(safe-area-inset-bottom)) 
-             max(20px, env(safe-area-inset-left));
+    padding: max(var(--space), env(safe-area-inset-top))
+        max(var(--space), env(safe-area-inset-right))
+        max(var(--space), env(safe-area-inset-bottom))
+        max(var(--space), env(safe-area-inset-left));
     overflow-x: hidden;
-    /* Melhora a legibilidade em telas de alta densidade */
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Remove o "flash" azul de toque no mobile */
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* Container principal */
+/* Foco visível global (navegação por teclado) */
+:focus-visible {
+    outline: 3px solid var(--text);
+    outline-offset: 4px;
+}
+
+/* ============================================================
+   2. CONTAINER PRINCIPAL
+   ============================================================ */
 .container {
     width: 100%;
-    max-width: 480px;
+    max-width: var(--container-max);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    /* Garante que o conteúdo não fique muito próximo das bordas em telas curtas */
     padding-block: 10px;
 }
 
-/* Nome no topo */
+/* ============================================================
+   3. NOME NO TOPO
+   ============================================================ */
 .profile-name {
     font-size: clamp(1.6rem, 6vw, 2rem);
     font-weight: 700;
+    line-height: 1.2;
     letter-spacing: 0.5px;
-    margin-bottom: 20px;
+    margin-bottom: var(--space);
+    color: var(--text);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-    color: #ffffff;
-    /* Permite quebra de linha se o nome for muito longo em telas estreitas */
+    /* Nome longo quebra sem estourar o container */
     overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
 }
 
-/* Wrapper da foto de perfil */
+/* ============================================================
+   4. FOTO DE PERFIL
+   ============================================================ */
 .avatar-wrapper {
     width: clamp(140px, 40vw, 180px);
-    height: clamp(140px, 40vw, 180px);
+    aspect-ratio: 1 / 1;
+    height: auto;
     border-radius: 50%;
-    border: 4px solid #ffffff;
+    border: 4px solid var(--border);
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    background-color: #1a1a1a;
-    /* Fallback visual quando a imagem não carrega */
+    background-color: var(--surface-alt);
+    box-shadow: var(--shadow-avatar);
+    flex-shrink: 0;
 }
 
-/* Fallback: exibe um ícone ou cor de fundo quando a imagem está ausente */
+/* Fallback visual quando a imagem não carrega */
 .avatar-wrapper.avatar-fallback {
-    background-color: #333333;
+    background-color: var(--surface-fallback);
     position: relative;
 }
 
 .avatar-wrapper.avatar-fallback::after {
     content: "👤";
-    font-size: 3rem;
-    color: #888;
+    font-size: clamp(2.2rem, 8vw, 3rem);
+    line-height: 1;
+    color: var(--text-muted);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -91,331 +151,137 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
 }
 
-/* Painel escuro com bordas arredondadas */
+/* ============================================================
+   5. PAINEL ESCURO (CARD)
+   ============================================================ */
 .card-panel {
-    background-color: #1c1c1e;
-    border-radius: 30px;
-    padding: 40px 25px;
     width: 100%;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    background-color: var(--surface);
+    border-radius: var(--radius-panel);
+    padding: 40px 25px;
+    box-shadow: var(--shadow-panel);
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 14px; /* espaço reduzido para o aviso logo abaixo */
 }
 
-/* Botão verde (CTA) */
+/* ============================================================
+   6. BOTÃO CTA (WHATSAPP)
+   ============================================================ */
 .cta-button {
-    display: inline-block;
-    background-color: #25D366;
-    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent);
+    color: var(--text);
     text-decoration: none;
     font-size: clamp(0.95rem, 3vw, 1.1rem);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.8px;
+    line-height: 1.4;
+    text-align: center;
     padding: 18px 30px;
-    border-radius: 50px;
+    border: none;
+    border-radius: var(--radius-pill);
     width: 100%;
     max-width: 350px;
-    text-align: center;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-    line-height: 1.4;
-    /* Melhora a área de toque em dispositivos móveis */
-    min-height: 48px;
+    min-height: var(--touch-target);
+    box-shadow: var(--shadow-btn);
+    transition: background-color 0.3s ease, transform 0.2s ease,
+        box-shadow 0.3s ease;
+    user-select: none;
 }
 
-.cta-button:hover {
-    background-color: #1ebe5a;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
-}
-
-.cta-button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 10px rgba(37, 211, 102, 0.4);
-}
-
-/* Foco visível para navegação por teclado */
-.cta-button:focus-visible {
-    outline: 3px solid #ffffff;
-    outline-offset: 4px;
-    box-shadow: 0 0 0 6px rgba(37, 211, 102, 0.6);
-}
-
-/* Rodapé */
-.footer {
-    margin-top: 10px;
-    font-size: clamp(0.7rem, 2vw, 0.8rem);
-    color: #888888;
-    letter-spacing: 0.3px;
-    text-align: center;
-}
-
-/* --- Adaptações para telas baixas (landscape ou dispositivos compactos) --- */
-@media (max-height: 600px) {
-    .container {
-        justify-content: flex-start;
-        padding-top: 10px;
-    }
-    .profile-name {
-        margin-bottom: 10px;
-    }
-    .avatar-wrapper {
-        margin-bottom: 15px;
-        width: clamp(100px, 25vw, 120px);
-        height: clamp(100px, 25vw, 120px);
-    }
-    .card-panel {
-        padding: 20px 15px;
-        margin-bottom: 15px;
-    }
-    .cta-button {
-        padding: 12px 20px;
-    }
-    .footer {
-        margin-top: 5px;
-    }
-}
-
-/* --- Orientação horizontal (landscape) em celulares --- */
-@media (orientation: landscape) and (max-height: 500px) {
-    .container {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-    }
-    .profile-name {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    .avatar-wrapper {
-        margin-bottom: 0;
-        flex-shrink: 0;
-    }
-    .card-panel {
-        width: auto;
-        flex-grow: 1;
-        margin-bottom: 0;
-    }
-    .footer {
-        width: 100%;
-        margin-top: 10px;
-    }
-}
-
-/* --- Respeita a preferência por movimento reduzido --- */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
+/* Hover apenas em dispositivos com ponteiro (evita hover "grudado" no mobile) */
+@media (hover: hover) and (pointer: fine) {
     .cta-button:hover {
-        transform: none;
+        background-color: var(--accent-hover);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-btn-hover);
     }
-}
-
-/* --- Suporte a modo de alto contraste (opcional, mas recomendado) --- */
-@media (forced-colors: active) {
-    .cta-button {
-        border: 2px solid ButtonText;
-    }
-    .avatar-wrapper {
-        border-color: CanvasText;
-    }
-}
-/* Reset e configurações globais */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    height: 100%;
-    height: 100dvh;
-}
-
-body {
-    background-color: #000000;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    color: #ffffff;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: max(20px, env(safe-area-inset-top)) 
-             max(20px, env(safe-area-inset-right)) 
-             max(20px, env(safe-area-inset-bottom)) 
-             max(20px, env(safe-area-inset-left));
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-}
-
-.container {
-    width: 100%;
-    max-width: 480px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding-block: 10px;
-}
-
-.profile-name {
-    font-size: clamp(1.6rem, 6vw, 2rem);
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    margin-bottom: 20px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-    color: #ffffff;
-    overflow-wrap: break-word;
-}
-
-.avatar-wrapper {
-    width: clamp(140px, 40vw, 180px);
-    height: clamp(140px, 40vw, 180px);
-    border-radius: 50%;
-    border: 4px solid #ffffff;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    background-color: #1a1a1a;
-}
-
-.avatar-wrapper.avatar-fallback {
-    background-color: #333333;
-    position: relative;
-}
-
-.avatar-wrapper.avatar-fallback::after {
-    content: "👤";
-    font-size: 3rem;
-    color: #888;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.profile-pic {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.card-panel {
-    background-color: #1c1c1e;
-    border-radius: 30px;
-    padding: 40px 25px;
-    width: 100%;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 14px; /* reduzido para acomodar o aviso logo abaixo */
-}
-
-.cta-button {
-    display: inline-block;
-    background-color: #25D366;
-    color: #ffffff;
-    text-decoration: none;
-    font-size: clamp(0.95rem, 3vw, 1.1rem);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    padding: 18px 30px;
-    border-radius: 50px;
-    width: 100%;
-    max-width: 350px;
-    text-align: center;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-    line-height: 1.4;
-    min-height: 48px;
-}
-
-.cta-button:hover {
-    background-color: #1ebe5a;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
 }
 
 .cta-button:active {
     transform: translateY(0);
-    box-shadow: 0 2px 10px rgba(37, 211, 102, 0.4);
+    box-shadow: var(--shadow-btn-active);
 }
 
 .cta-button:focus-visible {
-    outline: 3px solid #ffffff;
+    outline: 3px solid var(--text);
     outline-offset: 4px;
-    box-shadow: 0 0 0 6px rgba(37, 211, 102, 0.6);
+    box-shadow: 0 0 0 6px var(--accent-glow-strong);
 }
 
-/* Aviso discreto: informa que o clique leva a um site externo */
+/* ============================================================
+   7. AVISO DE LINK EXTERNO
+   ============================================================ */
 .external-notice {
     font-size: clamp(0.68rem, 2vw, 0.78rem);
-    color: #777777;
+    color: var(--text-subtle);
     letter-spacing: 0.2px;
-    margin-bottom: 24px;
     line-height: 1.4;
     max-width: 320px;
+    margin-bottom: 24px;
+    text-wrap: balance;
 }
 
+/* ============================================================
+   8. RODAPÉ
+   ============================================================ */
 .footer {
     margin-top: 0;
     font-size: clamp(0.7rem, 2vw, 0.8rem);
-    color: #888888;
+    color: var(--text-muted);
     letter-spacing: 0.3px;
     text-align: center;
+    text-wrap: balance;
 }
 
-/* Adaptações para telas baixas */
+/* ============================================================
+   9. TELAS BAIXAS (retrato compacto / landscape baixo)
+   ============================================================ */
 @media (max-height: 600px) {
     .container {
         justify-content: flex-start;
         padding-top: 10px;
     }
+
     .profile-name {
         margin-bottom: 10px;
     }
+
     .avatar-wrapper {
-        margin-bottom: 15px;
         width: clamp(100px, 25vw, 120px);
-        height: clamp(100px, 25vw, 120px);
+        margin-bottom: 15px;
     }
+
     .card-panel {
         padding: 20px 15px;
         margin-bottom: 10px;
     }
+
     .cta-button {
         padding: 12px 20px;
     }
+
     .external-notice {
         margin-bottom: 12px;
     }
+
     .footer {
         margin-top: 5px;
     }
 }
 
-/* Orientação horizontal (landscape) em celulares */
+/* ============================================================
+   10. LANDSCAPE EM CELULARES
+   ============================================================ */
 @media (orientation: landscape) and (max-height: 500px) {
     .container {
         flex-direction: row;
@@ -424,30 +290,41 @@ body {
         align-items: center;
         gap: 16px;
     }
+
     .profile-name {
         width: 100%;
         margin-bottom: 6px;
     }
+
     .avatar-wrapper {
         margin-bottom: 0;
-        flex-shrink: 0;
     }
+
     .card-panel {
         width: auto;
         flex-grow: 1;
         margin-bottom: 0;
     }
+
+    .cta-button {
+        max-width: none;
+    }
+
     .external-notice {
         width: 100%;
+        max-width: none;
         margin-bottom: 6px;
     }
+
     .footer {
         width: 100%;
         margin-top: 6px;
     }
 }
 
-/* Respeita a preferência por movimento reduzido */
+/* ============================================================
+   11. MOVIMENTO REDUZIDO
+   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -457,20 +334,54 @@ body {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
-    .cta-button:hover {
+
+    .cta-button:hover,
+    .cta-button:active {
         transform: none;
     }
 }
 
-/* Modo de alto contraste */
+/* ============================================================
+   12. ALTO CONTRASTE (Windows High Contrast / forced-colors)
+   ============================================================ */
 @media (forced-colors: active) {
     .cta-button {
         border: 2px solid ButtonText;
+        box-shadow: none;
     }
+
     .avatar-wrapper {
         border-color: CanvasText;
+        box-shadow: none;
     }
+
+    .card-panel {
+        border: 1px solid CanvasText;
+        box-shadow: none;
+    }
+
     .external-notice {
         color: CanvasText;
+    }
+
+    .footer {
+        color: CanvasText;
+    }
+}
+
+/* ============================================================
+   13. PREFERÊNCIA POR MAIS CONTRASTE
+   ============================================================ */
+@media (prefers-contrast: more) {
+    .external-notice {
+        color: #b0b0b0;
+    }
+
+    .footer {
+        color: #b0b0b0;
+    }
+
+    .avatar-wrapper {
+        border-width: 5px;
     }
 }
