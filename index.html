@@ -1,50 +1,193 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
     <title>Thaynara Martins</title>
+
     <meta name="description" content="Página oficial de Thaynara Martins.">
+    <meta name="theme-color" content="#080808">
+
+    <!-- FAVICONS ORIGINAIS -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- CSS PRINCIPAL -->
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
+
+    <!-- CSS DA CONFIRMAÇÃO DE IDADE -->
+    <link rel="stylesheet" href="age-gate.css">
 </head>
+
 <body>
 
     <main class="container">
+
         <h1 class="profile-name">Thaynara Martins</h1>
 
         <div class="avatar-wrapper">
-            <img src="assets/profile.jpg" 
-                 alt="Foto de perfil de Thaynara Martins" 
-                 class="profile-pic" 
-                 width="180" 
-                 height="180" 
-                 loading="eager"
-                 onerror="this.style.display='none'; this.parentElement.classList.add('avatar-fallback');">
+            <img
+                src="assets/profile.jpg"
+                alt="Foto de perfil de Thaynara Martins"
+                class="profile-pic"
+                width="180"
+                height="180"
+                loading="eager"
+                onerror="this.style.display='none'; this.parentElement.classList.add('avatar-fallback');"
+            >
         </div>
 
         <div class="card-panel">
-            <a href="https://bouncy.ai/segredosdanara" 
-               class="cta-button" 
-               id="ctaButton"
-               target="_blank" 
-               rel="noopener noreferrer nofollow">
+
+            <a
+                href="https://bouncy.ai/segredosdanara"
+                class="cta-button"
+                id="ctaButton"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+            >
                 CLIQUE AQUI PARA ACESSAR
             </a>
+
         </div>
 
-        <!-- Aviso discreto de saída para site externo -->
-        <p class="external-notice">Você será direcionado para um site externo.</p>
+        <!-- AVISO DE REDIRECIONAMENTO -->
+        <p class="external-notice">
+            Você será direcionado para um site externo.
+        </p>
 
         <footer class="footer">
             <p>Thaynara Martins © 2026. All rights reserved.</p>
         </footer>
+
     </main>
 
+
+    <!-- =========================================
+         MODAL DE CONFIRMAÇÃO DE IDADE
+         ========================================= -->
+
+    <div
+        class="age-overlay"
+        id="ageModal"
+        hidden
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="ageTitle"
+        aria-describedby="ageQuestion"
+    >
+
+        <div class="age-card">
+
+            <!-- ÍCONE DE SEGURANÇA -->
+            <div class="age-icon" aria-hidden="true">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    width="34"
+                    height="34"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+
+                    <path
+                        d="M12 2.5L20 5.5V11.2C20 16.1 16.6 20.1 12 21.5C7.4 20.1 4 16.1 4 11.2V5.5L12 2.5Z"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linejoin="round"
+                    />
+
+                    <path
+                        d="M8.5 12L10.8 14.3L15.8 9.3"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+
+                </svg>
+
+            </div>
+
+
+            <!-- TÍTULO -->
+            <h2 id="ageTitle">
+                CONFIRMAÇÃO DE IDADE
+            </h2>
+
+
+            <!-- PERGUNTA -->
+            <p id="ageQuestion">
+                Você tem 18 anos ou mais?
+            </p>
+
+
+            <!-- BOTÕES -->
+            <div class="age-actions" id="ageActions">
+
+                <button
+                    type="button"
+                    class="age-button age-yes"
+                    id="ageYes"
+                >
+                    SIM, TENHO 18 ANOS OU MAIS
+                </button>
+
+
+                <button
+                    type="button"
+                    class="age-button age-no"
+                    id="ageNo"
+                >
+                    NÃO, SOU MENOR DE 18
+                </button>
+
+            </div>
+
+
+            <!-- MENSAGEM PARA MENORES -->
+            <div
+                class="age-restricted"
+                id="ageRestricted"
+                hidden
+            >
+
+                <p>
+                    O acesso não está disponível para menores de 18 anos.
+                </p>
+
+                <button
+                    type="button"
+                    class="age-button age-back"
+                    id="ageBack"
+                >
+                    VOLTAR
+                </button>
+
+            </div>
+
+
+            <!-- AVISO INFORMATIVO -->
+            <p class="age-disclaimer">
+                Ao continuar, você declara que possui idade igual ou superior a 18 anos.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
+
     <script src="script.js"></script>
+    <script src="age-gate.js"></script>
+
 </body>
 </html>
