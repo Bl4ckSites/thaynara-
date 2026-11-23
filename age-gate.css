@@ -1,0 +1,433 @@
+
+/* =========================================
+   AGE GATE - CONFIRMAÇÃO DE IDADE
+   THAYNARA MARTINS
+   ========================================= */
+
+
+/* =========================================
+   SOBREPOSIÇÃO DO MODAL
+   ========================================= */
+
+.age-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.86);
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
+
+    animation: ageFadeIn 0.25s ease;
+
+}
+
+
+/* ELEMENTOS OCULTOS */
+
+.age-overlay[hidden],
+.age-restricted[hidden] {
+
+    display: none !important;
+
+}
+
+
+/* =========================================
+   CARTÃO PRINCIPAL
+   ========================================= */
+
+.age-card {
+
+    width: 100%;
+
+    max-width: 420px;
+
+    padding: 36px 28px 26px;
+
+    text-align: center;
+
+    background: #111111;
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+
+    border-radius: 20px;
+
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65);
+
+    animation: ageCardIn 0.3s ease;
+
+}
+
+
+/* =========================================
+   ÍCONE
+   ========================================= */
+
+.age-icon {
+
+    width: 66px;
+
+    height: 66px;
+
+    margin: 0 auto 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #25d366;
+
+    background: rgba(37, 211, 102, 0.09);
+
+    border: 1px solid rgba(37, 211, 102, 0.22);
+
+    border-radius: 50%;
+
+}
+
+
+/* =========================================
+   TÍTULO
+   ========================================= */
+
+.age-card h2 {
+
+    margin: 0 0 13px;
+
+    color: #ffffff;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+
+    line-height: 1.35;
+
+}
+
+
+/* =========================================
+   PERGUNTA
+   ========================================= */
+
+.age-card > p:not(.age-disclaimer) {
+
+    margin: 0 0 28px;
+
+    color: #c9c9c9;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================
+   ÁREA DOS BOTÕES
+   ========================================= */
+
+.age-actions {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+/* =========================================
+   ESTILO BASE DOS BOTÕES
+   ========================================= */
+
+.age-button {
+
+    width: 100%;
+
+    min-height: 52px;
+
+    padding: 14px 16px;
+
+    border: 1px solid transparent;
+
+    border-radius: 10px;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.6px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+/* FOCO ACESSÍVEL */
+
+.age-button:focus-visible {
+
+    outline: 2px solid #ffffff;
+
+    outline-offset: 4px;
+
+}
+
+
+/* =========================================
+   BOTÃO SIM
+   ========================================= */
+
+.age-yes {
+
+    color: #07130b;
+
+    background: #25d366;
+
+}
+
+
+.age-yes:hover {
+
+    background: #35e477;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =========================================
+   BOTÃO NÃO
+   ========================================= */
+
+.age-no {
+
+    color: #e5e5e5;
+
+    background: #1b1b1b;
+
+    border-color: #333333;
+
+}
+
+
+.age-no:hover {
+
+    background: #262626;
+
+    border-color: #555555;
+
+}
+
+
+/* =========================================
+   ÁREA DE RESTRIÇÃO
+   ========================================= */
+
+.age-restricted {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+}
+
+
+.age-restricted p {
+
+    margin: 0;
+
+    color: #e2e2e2;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================
+   BOTÃO VOLTAR
+   ========================================= */
+
+.age-back {
+
+    color: #ffffff;
+
+    background: #222222;
+
+    border-color: #444444;
+
+}
+
+
+.age-back:hover {
+
+    background: #303030;
+
+}
+
+
+/* =========================================
+   AVISO INFERIOR
+   ========================================= */
+
+.age-disclaimer {
+
+    margin: 24px 0 0;
+
+    color: #777777;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================
+   ANIMAÇÕES
+   ========================================= */
+
+@keyframes ageFadeIn {
+
+    from {
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        opacity: 1;
+
+    }
+
+}
+
+
+@keyframes ageCardIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(12px) scale(0.98);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .age-overlay {
+
+        padding: 18px;
+
+    }
+
+
+    .age-card {
+
+        padding: 30px 22px 23px;
+
+        border-radius: 17px;
+
+    }
+
+
+    .age-card h2 {
+
+        font-size: 18px;
+
+    }
+
+
+    .age-card > p:not(.age-disclaimer) {
+
+        font-size: 14px;
+
+    }
+
+
+    .age-button {
+
+        min-height: 50px;
+
+        font-size: 11px;
+
+    }
+
+}
+
+
+/* =========================================
+   ACESSIBILIDADE
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .age-overlay,
+    .age-card {
+
+        animation: none;
+
+    }
+
+
+    .age-button {
+
+        transition: none;
+
+    }
+
+}
